@@ -24,10 +24,14 @@ public class CookieButton extends JPanel {
         cookieButton.setFocusPainted(false);
 
         cookieAmountLabel = new JLabel("You have " + CookieManager.getCookies() + " cookies");
-        cookieAmountLabel.setBounds(450, 200, 1000, 30);
+        cookieAmountLabel.setBounds(0, 200, 1000, 30);
+        cookieAmountLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        cookieAmountLabel.setVerticalAlignment(SwingConstants.CENTER);
 
         CPS = new JLabel(CookieManager.getCPS() + " Cookies Per Sec");
-        CPS.setBounds(450, 230, 1000, 30);
+        CPS.setBounds(0, 230, 1000, 30);
+        CPS.setHorizontalAlignment(SwingConstants.CENTER);
+        CPS.setVerticalAlignment(SwingConstants.CENTER);
 
         cookieButton.addActionListener(e -> {
             long newCount = CookieManager.add(CookieManager.getMultiplier() * CookieManager.getClickingMultiplier());

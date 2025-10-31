@@ -23,7 +23,7 @@ public class GoldenCookie extends JPanel {
         JButton goldenButton = new JButton(cookieIcon);
         goldenButton.setBounds(rand.nextInt(901), rand.nextInt(901), 100, 100);
 
-        // 🔧 Make the button display only the image
+
         goldenButton.setOpaque(false);
         goldenButton.setContentAreaFilled(false);
         goldenButton.setBorderPainted(false);

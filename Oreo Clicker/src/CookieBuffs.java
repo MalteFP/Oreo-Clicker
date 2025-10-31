@@ -10,7 +10,7 @@ public class CookieBuffs {
         if (frenzyDuration == 0) {
             CookieManager.setMultiplier(CookieManager.getMultiplier() * 7);
         }
-        buffText("FRENZY");
+        buffText("FRENZY!");
         frenzyDuration += 77;
     }
 
@@ -18,7 +18,7 @@ public class CookieBuffs {
         if (clickingFrenzyDuration == 0) {
             CookieManager.setClickingMultiplier(CookieManager.getClickingMultiplier() * 777);
         }
-        buffText("CLICKING FRENZY");
+        buffText("CLICKING FRENZY!");
         clickingFrenzyDuration += 13;
     }
 
@@ -26,16 +26,28 @@ public class CookieBuffs {
         if (CookieManager.getCookies() * 0.1 + 13 > CookieManager.getCPS() * 1200) {
             CookieManager.add((int) (CookieManager.getCookies() * 0.1 + 13));
         } else {
-            CookieManager.add(CookieManager.getCPS() * 1200);
+            CookieManager.add(CookieManager.getCPS() * 1200L);
         }
-        buffText("LUCKY");
+        buffText("LUCKY!");
+    }
+
+    public static void buildingSpecial() {
+        if(Main.playerStats.getDifferentBuildingsOwned()>=10){
+            Random rand = new Random();
+            Main.buildingSpecialList.get(rand.nextInt(Main.buildingSpecialList.size())).buildingSpecial();
+
+        }else {
+            frenzy();
+        }
+
     }
 
     public static void randomBuff() {
         List<Runnable> buffs = List.of(
-                CookieBuffs::frenzy,
+               /* CookieBuffs::frenzy,
                 CookieBuffs::clickingFrenzy,
-                CookieBuffs::lucky
+                CookieBuffs::lucky,*/
+                CookieBuffs::buildingSpecial
         );
 
         Random rand = new Random();
@@ -44,12 +56,13 @@ public class CookieBuffs {
 
     public static void buffText(String type) {
         JLabel tempLabel = new JLabel(type);
-        tempLabel.setBounds(475, 300, 50, 30); // x, y, width, height
+        tempLabel.setBounds(0, 300, 1000, 30); // x, y, width, height
+        tempLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        tempLabel.setVerticalAlignment(SwingConstants.CENTER);
 
         Main.frame.getContentPane().add(tempLabel);
         Main.frame.repaint();
 
-// Remove after 2 seconds
         Timer timer = new Timer(2000, e -> {
             Main.frame.getContentPane().remove(tempLabel);
             Main.frame.revalidate();
@@ -57,6 +70,7 @@ public class CookieBuffs {
         });
         timer.setRepeats(false);
         timer.start();
+
 
     }
 
@@ -72,6 +86,13 @@ public class CookieBuffs {
         } else if (clickingFrenzyDuration == 1) {
             CookieManager.setClickingMultiplier(CookieManager.getClickingMultiplier() / 777);
             clickingFrenzyDuration--;
+        }
+        for(int i = 0; i < Main.buildingSpecialList.size();i++) {
+            if(Main.buildingSpecialList.get(i).buffTimer > 1) {
+                Main.buildingSpecialList.get(i).setBuffTimer(Main.buildingSpecialList.get(i).buffDuration-1);
+            } else if (Main.buildingSpecialList.get(i).buffTimer == 1) {
+                CookieManager.setMultiplier((int) (CookieManager.getMultiplier()/(1+0.1*Main.buildingSpecialList.get(i).startedBuildingAmount)));
+            }
         }
     }
 }

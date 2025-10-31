@@ -21,6 +21,10 @@ public class Building extends JPanel {
     public void buyBuilding(JLabel ownedLabel){
         if(CookieManager.getCookies()>= basePrice*Math.pow(1.15, amountOwned)){
             CookieManager.add((int) (-basePrice*Math.pow(1.15, amountOwned)));
+            if(this.amountOwned == 0) {
+                Main.playerStats.setDifferentBuildingsOwned(Main.playerStats.getDifferentBuildingsOwned()+1);
+                System.out.println(Main.playerStats.getDifferentBuildingsOwned());
+            }
             this.amountOwned++;
             button.setText("Buy " + name + " for " + basePrice*Math.pow(1.15, amountOwned));
             ownedLabel.setText("You own " + amountOwned + " " + name);
@@ -32,13 +36,13 @@ public class Building extends JPanel {
     public void makeVisuals(Container panel) {
 
         button.setText("Buy " + name + " for " + basePrice*Math.pow(1.15, amountOwned));
-        button.setBounds(600, 300 + (50 * buildingID), 400, 30);
+        button.setBounds(600, 350 + (50 * buildingID), 400, 30);
 
         JLabel buildingLabel = new JLabel(name + " produces " + baseProduction + " cps");
-        buildingLabel.setBounds(600, 320 + (50 * buildingID), 200, 30);
+        buildingLabel.setBounds(600, 370 + (50 * buildingID), 200, 30);
 
         JLabel ownedLabel = new JLabel("You own " + amountOwned + " " + name);
-        ownedLabel.setBounds(800, 320 + (50 * buildingID), 200, 30);
+        ownedLabel.setBounds(800, 370 + (50 * buildingID), 200, 30);
 
         button.addActionListener(e -> buyBuilding(ownedLabel));
 

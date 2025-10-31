@@ -10,16 +10,16 @@ public class CookieManager {
         return cookies.get();
     }
 
-    public static long add(int amount) {
+    public static long add(long amount) {
         return cookies.addAndGet(amount);
 
     }
 
-    public static int getCPS() {
-        int totalProduction = 0;
+    public static long getCPS() {
+        long totalProduction = 0;
 
         for (int i = 0; i < Main.buildingList.size(); i++) {
-            totalProduction += (int) (Main.buildingList.get(i).getAmountOwned() * Main.buildingList.get(i).getBaseProduction()*multiplier);
+            totalProduction += (long) (Main.buildingList.get(i).getAmountOwned() * Main.buildingList.get(i).getBaseProduction()*multiplier);
         }
         return totalProduction;
     }
