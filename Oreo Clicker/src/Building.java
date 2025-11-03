@@ -22,8 +22,8 @@ public class Building extends JPanel {
         if(CookieManager.getCookies()>= basePrice*Math.pow(1.15, amountOwned)){
             CookieManager.add((int) (-basePrice*Math.pow(1.15, amountOwned)));
             if(this.amountOwned == 0) {
-                Main.playerStats.setDifferentBuildingsOwned(Main.playerStats.getDifferentBuildingsOwned()+1);
-                System.out.println(Main.playerStats.getDifferentBuildingsOwned());
+                Main.statList.get(4).addNumber(1);
+                System.out.println(Main.statList.get(4).number);
             }
             this.amountOwned++;
             button.setText("Buy " + name + " for " + basePrice*Math.pow(1.15, amountOwned));

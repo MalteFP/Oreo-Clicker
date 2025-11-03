@@ -32,21 +32,21 @@ public class CookieBuffs {
     }
 
     public static void buildingSpecial() {
-        if(Main.playerStats.getDifferentBuildingsOwned()>=10){
+        if(Main.statList.get(4).getNumber()>=10){
             Random rand = new Random();
             Main.buildingSpecialList.get(rand.nextInt(Main.buildingSpecialList.size())).buildingSpecial();
 
         }else {
-            frenzy();
+            randomBuff();
         }
 
     }
 
     public static void randomBuff() {
         List<Runnable> buffs = List.of(
-               /* CookieBuffs::frenzy,
+                CookieBuffs::frenzy,
                 CookieBuffs::clickingFrenzy,
-                CookieBuffs::lucky,*/
+                CookieBuffs::lucky,
                 CookieBuffs::buildingSpecial
         );
 

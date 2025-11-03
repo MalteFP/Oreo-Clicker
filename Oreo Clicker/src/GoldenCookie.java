@@ -34,6 +34,7 @@ public class GoldenCookie extends JPanel {
         container.repaint(); // refresh the UI
 
         goldenButton.addActionListener(e -> {
+            Main.statList.get(3).addNumber(1);
             container.remove(goldenButton);
             container.revalidate();
             container.repaint();

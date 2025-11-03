@@ -34,8 +34,7 @@ public class CookieButton extends JPanel {
         CPS.setVerticalAlignment(SwingConstants.CENTER);
 
         cookieButton.addActionListener(e -> {
-            long newCount = CookieManager.add(CookieManager.getMultiplier() * CookieManager.getClickingMultiplier());
-            cookieAmountLabel.setText("You have " + newCount + " cookies");
+            cookieAmountLabel.setText("You have " + CookieManager.add((long) CookieManager.getMultiplier() * CookieManager.getClickingMultiplier()) + " cookies");
         });
 
         add(cookieButton);
